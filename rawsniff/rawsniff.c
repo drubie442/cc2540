@@ -1,6 +1,6 @@
 #include <stdbool.h>
 
-#include <libusb.h>
+#include "/usr/include/libusb-1.0/libusb.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -90,14 +90,14 @@ static int setup(libusb_device_handle *dev, int channel)
     }
     ret = libusb_claim_interface(dev, 0);
     if (ret < 0) {
-        printf("claim interface failed!\n");
+        printf("claim interface failed! returned %d\n",ret);
         exit(1);
         // return ret;
     }
 
     ret = libusb_set_configuration( dev, 1);
     if (ret < 0) {
-        printf("setting configuraiton failed!\n");
+        printf("setting configuration failed! returned %d\n",ret);
         // return ret;
     }
     
@@ -145,8 +145,8 @@ void bulk_read(pcap_dumper_t* pd, libusb_device_handle *dev)
             printf("\n");
 */
             struct pcap_pkthdr packet_header;
-            struct timeval ts;
-/*
+/*            struct timeval ts;
+
             if (data[0] != 0) {
               printf("LEN TOO LARGE");
               return;
